@@ -20,16 +20,16 @@ const sub = async () => {
     if (error.value?.data?.errors) {
       throw error.value?.data?.errors;
     }
+    cookie.value = null;
     cookie.value = data.value.data.token;
-    console.log(data.value)
-    if(data.value){
-        return await navigateTo("/profile")
+    console.log(data.value);
+    if (data.value) {
+      return await navigateTo("/profile");
     }
   } catch (error) {
     console.log(error);
     errors.value = error;
   }
-
 };
 </script>
 
@@ -47,7 +47,6 @@ const sub = async () => {
   </div>
   <nuxt-link to="/registration">reg</nuxt-link>
   <nuxt-link to="/checkUser">Check</nuxt-link>
-
 </template>
 
 <style scoped></style>
