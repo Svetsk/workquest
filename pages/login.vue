@@ -8,7 +8,7 @@ const errors = ref(null);
 const cookie = useCookie("jwt-token");
 const sub = async () => {
   try {
-    const { data, error } = await useFetch("http://localhost:5281/api/Auth/user/create", {
+    const { data, error } = await useFetch("http://localhost:5281/api/Auth/user", {
       method: "POST",
       body: JSON.stringify(state),
       headers: {
@@ -21,10 +21,15 @@ const sub = async () => {
       throw error.value?.data?.errors;
     }
     cookie.value = data.value.data.token;
+    console.log(data.value)
+    if(data.value){
+        return await navigateTo("/profile")
+    }
   } catch (error) {
     console.log(error);
     errors.value = error;
   }
+
 };
 </script>
 
@@ -40,6 +45,9 @@ const sub = async () => {
       <pre>{{ errors }}</pre>
     </div>
   </div>
+  <nuxt-link to="/registration">reg</nuxt-link>
+  <nuxt-link to="/checkUser">Check</nuxt-link>
+
 </template>
 
 <style scoped></style>
